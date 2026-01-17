@@ -47,12 +47,36 @@ const Navbar = () => {
   
   const adminList = [
   {
-    name: "Admin Zyoran",
-    phone: "6281234567890",
+    name: "Owner Zyoran",
+    phone: "6282182933467",
   },
   {
-    name: "Admin Kedua",
-    phone: "6289876543210",
+    name: "Admin Kucing",
+    phone: "601125422011",
+  },
+    {
+    name: "Admin Lan",
+    phone: "6285694248817",
+  },
+  {
+    name: "Admin Ditzy",
+    phone: "6285752535878",
+  },
+    {
+    name: "Admin Ican",
+    phone: "62895414345886",
+  },
+  {
+    name: "Admin Julio",
+    phone: "6288210233005",
+  },
+  {
+    name: "Admin Rizz",
+    phone: "6283198674281",
+  },
+  {
+    name: "Admin Jamal",
+    phone: "6283857798160",
   },
 ];
 
