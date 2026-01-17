@@ -36,7 +36,7 @@ const toBold = (text: string) => {
 };
 
 const patterns = [
-  (name: string) => `${toBold(name)} ${toBold(MARGA)}`,
+  (name: string) => `${toBold(name)}${toBold(MARGA)}`,
   (name: string) => `${toBold(name)} | ${toBold(MARGA)}`,
   (name: string) => `${toBold(MARGA)} | ${toBold(name)}`,
   (name: string) => `${toBold(name)} ${toBold("Ft")} ${toBold(MARGA)}`,
