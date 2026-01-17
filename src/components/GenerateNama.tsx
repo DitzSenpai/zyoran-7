@@ -4,29 +4,30 @@ import { Sparkles, RefreshCw, Copy, Check } from "lucide-react";
 const MARGA = "Zyoran'7";
 
 const toBold = (text: string) => {
-  const boldA = "𝐚".charCodeAt(0);
-  const boldAUpper = "𝐀".charCodeAt(0);
-  const normalA = "a".charCodeAt(0);
-  const normalAUpper = "A".charCodeAt(0);
+  const normalA = "a".codePointAt(0)!;
+  const normalAUpper = "A".codePointAt(0)!;
+  const boldA = "𝐚".codePointAt(0)!;
+  const boldAUpper = "𝐀".codePointAt(0)!;
+  const bold0 = "𝟎".codePointAt(0)!;
 
   return text
     .split("")
     .map((ch) => {
-      const code = ch.charCodeAt(0);
+      const code = ch.codePointAt(0)!;
 
       // a-z
       if (code >= 97 && code <= 122) {
-        return String.fromCharCode(boldA + (code - normalA));
+        return String.fromCodePoint(boldA + (code - normalA));
       }
 
       // A-Z
       if (code >= 65 && code <= 90) {
-        return String.fromCharCode(boldAUpper + (code - normalAUpper));
+        return String.fromCodePoint(boldAUpper + (code - normalAUpper));
       }
 
       // 0-9
       if (code >= 48 && code <= 57) {
-        return String.fromCharCode("𝟎".charCodeAt(0) + (code - 48));
+        return String.fromCodePoint(bold0 + (code - 48));
       }
 
       return ch;
