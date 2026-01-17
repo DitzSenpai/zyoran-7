@@ -3,11 +3,42 @@ import { Sparkles, RefreshCw, Copy, Check } from "lucide-react";
 
 const MARGA = "Zyoran'7";
 
+const toBold = (text: string) => {
+  const boldA = "𝐚".charCodeAt(0);
+  const boldAUpper = "𝐀".charCodeAt(0);
+  const normalA = "a".charCodeAt(0);
+  const normalAUpper = "A".charCodeAt(0);
+
+  return text
+    .split("")
+    .map((ch) => {
+      const code = ch.charCodeAt(0);
+
+      // a-z
+      if (code >= 97 && code <= 122) {
+        return String.fromCharCode(boldA + (code - normalA));
+      }
+
+      // A-Z
+      if (code >= 65 && code <= 90) {
+        return String.fromCharCode(boldAUpper + (code - normalAUpper));
+      }
+
+      // 0-9
+      if (code >= 48 && code <= 57) {
+        return String.fromCharCode("𝟎".charCodeAt(0) + (code - 48));
+      }
+
+      return ch;
+    })
+    .join("");
+};
+
 const patterns = [
-  (name: string) => `${name}${MARGA}`,
-  (name: string) => `${name} | ${MARGA}`,
-  (name: string) => `${MARGA} | ${name}`,
-  (name: string) => `${name} Ft ${MARGA}`,
+  (name: string) => `${toBold(name)} ${toBold(MARGA)}`,
+  (name: string) => `${toBold(name)} | ${toBold(MARGA)}`,
+  (name: string) => `${toBold(MARGA)} | ${toBold(name)}`,
+  (name: string) => `${toBold(name)} ${toBold("Ft")} ${toBold(MARGA)}`,
 ];
 
 const GenerateNama = () => {
@@ -15,24 +46,24 @@ const GenerateNama = () => {
   const [generatedNames, setGeneratedNames] = useState<string[]>([]);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  
+
   const resultRef = useRef<HTMLDivElement>(null);
 
-const generateNames = () => {
-  if (!inputName.trim()) return;
+  const generateNames = () => {
+    if (!inputName.trim()) return;
 
-  const name = inputName.trim();
-  const results = patterns.map(p => p(name));
+    const name = inputName.trim();
+    const results = patterns.map((p) => p(name));
 
-  setGeneratedNames(results);
+    setGeneratedNames(results);
 
-  setTimeout(() => {
-    resultRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }, 100);
-};
+    setTimeout(() => {
+      resultRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+  };
 
   const copyToClipboard = (name: string, index: number) => {
     navigator.clipboard.writeText(name);
@@ -75,25 +106,25 @@ const generateNames = () => {
                 type="text"
                 value={inputName}
                 onChange={(e) => setInputName(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && generateNames()}
+                onKeyDown={(e) => e.key === "Enter" && generateNames()}
                 placeholder="Contoh: Ditzy"
                 className="flex-1 px-6 py-4 bg-background border-2 border-primary/30 rounded-xl text-foreground font-semibold text-lg focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground/50"
                 maxLength={15}
               />
               <button
-  onClick={generateNames}
-  disabled={!inputName.trim()}
-  className="w-full sm:w-auto px-6 sm:px-8 py-4 bg-gradient-to-r from-primary to-crimson-dark rounded-xl font-bold text-foreground box-glow hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
->
-  <RefreshCw className="w-5 h-5" />
-  <span className="text-sm sm:text-base">Generate</span>
-</button>
+                onClick={generateNames}
+                disabled={!inputName.trim()}
+                className="w-full sm:w-auto px-6 sm:px-8 py-4 bg-gradient-to-r from-primary to-crimson-dark rounded-xl font-bold text-foreground box-glow hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                <RefreshCw className="w-5 h-5" />
+                <span className="text-sm sm:text-base">Generate</span>
+              </button>
             </div>
           </div>
 
           {/* Generated Names */}
           {generatedNames.length > 0 && (
-  <div ref={resultRef} className="animate-fade-in">
+            <div ref={resultRef} className="animate-fade-in">
               <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wider">
                 Hasil Generate
               </h3>
@@ -120,7 +151,7 @@ const generateNames = () => {
                   </div>
                 ))}
               </div>
-              
+
               {/* Regenerate button */}
               <button
                 onClick={generateNames}
