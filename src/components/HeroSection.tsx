@@ -53,7 +53,7 @@ const HeroSection = () => {
                     border-4 border-primary box-glow
                     overflow-hidden animate-float">
       <img
-        src="/public/marga-logo.jpg"
+        src="/marga-logo.jpg"
         alt="Logo Marga Zyoran'7"
         className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
       />
